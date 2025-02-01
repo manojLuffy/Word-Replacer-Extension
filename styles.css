@@ -1,0 +1,453 @@
+::-webkit-scrollbar {
+	width: 6px;
+}
+::-webkit-scrollbar-track {
+	box-shadow: inset 0 0 6px rgba(0, 0, 0, 0);
+}
+::-webkit-scrollbar-thumb {
+	background-color: #ccc;
+	border-radius: 20px;
+	cursor: pointer;
+}
+::-webkit-scrollbar-thumb:hover {
+	background-color: rgba(207, 220, 246, 1);
+	cursor: pointer;
+}
+
+body {
+	font-family: "Arial", sans-serif;
+	margin: 0;
+	padding: 15px;
+	min-width: 300px;
+	background-color: #f9f9f9;
+}
+
+.container {
+	text-align: center;
+}
+
+h1 {
+	font-size: 18px;
+	margin-bottom: 15px;
+	color: #333;
+}
+
+h2 {
+	font-size: 16px;
+	color: #333;
+	text-align: left;
+}
+
+.input-group {
+	margin-bottom: 15px;
+	text-align: left;
+}
+
+label {
+	display: block;
+	margin-bottom: 5px;
+	font-weight: bold;
+	color: #555;
+}
+
+input {
+	width: 100%;
+	padding: 8px;
+	box-sizing: border-box;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	font-size: 14px;
+}
+
+input:focus {
+	border-color: #4caf50;
+	outline: none;
+}
+
+button {
+	width: 100%;
+	padding: 10px;
+	background-color: #4caf50;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	font-size: 14px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+button:hover {
+	background-color: #45a049;
+}
+
+#status {
+	margin-top: 10px;
+	font-size: 12px;
+	color: #4caf50;
+}
+
+.delete-button {
+	background-color: #f44336;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	padding: 10px 15px;
+	cursor: pointer;
+}
+
+.empty-state {
+	text-align: center;
+	color: #888;
+	font-size: 14px;
+	padding: 20px;
+	border: 1px dashed #ddd;
+	border-radius: 4px;
+	margin-top: 10px;
+}
+
+.empty-state p {
+	margin: 0;
+}
+
+.replacements-list {
+	max-height: 200px;
+	overflow-y: auto;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	background-color: #fff;
+	padding: 10px;
+	margin-bottom: 10px;
+}
+
+.replacements-list:empty {
+	display: none; /* Hide the white box when the list is empty */
+}
+
+.replacement-item {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px;
+	border-bottom: 1px solid #eee;
+}
+
+.replacement-item:last-child {
+	border-bottom: none;
+}
+
+.replacement-item span {
+	font-size: 16px;
+	color: #333;
+	text-align: left;
+}
+
+.replacement-item button {
+	background-color: #ff4d4d;
+	border: none;
+	color: white;
+	padding: 10px 15px;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 14px;
+	transition: background-color 0.3s ease;
+	width: auto;
+	transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.replacement-item button:hover {
+	background-color: #ff1a1a;
+	transform: scale(1.05);
+}
+
+.replacement-content {
+	display: flex;
+	align-items: center;
+	gap: 8px; /* Space between icon and text */
+	flex-grow: 1;
+}
+
+.icon-container {
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	cursor: pointer;
+	width: 24px;
+	height: 24px;
+}
+
+input:disabled {
+	background-color: #f0f0f0;
+	color: #a0a0a0;
+	cursor: not-allowed;
+}
+
+/* Domain toggles (edit modal) */
+.domain-toggle {
+	position: relative;
+	display: inline-block;
+	width: 40px;
+	height: 20px;
+}
+
+.domain-toggle input {
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+
+.domain-toggle .slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #ccc;
+	transition: 0.4s;
+	border-radius: 20px;
+}
+
+.domain-toggle .slider:before {
+	position: absolute;
+	content: "";
+	height: 16px;
+	width: 16px;
+	left: 2px;
+	bottom: 2px;
+	background-color: white;
+	transition: 0.3s ease;
+	border-radius: 50%;
+}
+
+.domain-toggle input:checked + .slider {
+	background-color: #4caf50;
+}
+
+.domain-toggle input:checked + .slider:before {
+	transform: translateX(20px);
+}
+
+/* Element toggle (main list) */
+.element-toggle {
+	display: inline-block;
+	height: 16px;
+	position: relative;
+	min-width: 30px;
+	margin-right: 8px;
+}
+
+.element-toggle input {
+	display: none;
+}
+
+.element-toggle .slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #ccc;
+	transition: background-color 0.3s ease, transform 0.3s ease; /* Apply transition to background-color and transform */
+	border-radius: 24px;
+}
+
+.element-toggle .slider:before {
+	position: absolute;
+	content: "";
+	height: 12px;
+	width: 12px;
+	border: 1px solid #ccc;
+	background-color: white;
+	left: 2px;
+	bottom: 2px;
+	transition: transform 0.3s ease; /* Apply transition to transform */
+	border-radius: 50%;
+}
+
+.element-toggle input:checked + .slider {
+	background-color: #4caf50; /* Change background color when checked */
+}
+
+.element-toggle input:checked + .slider:before {
+	transform: translateX(12px); /* Move the slider knob when checked */
+}
+
+.action-buttons {
+	display: flex;
+	gap: 10px; /* Space between icons */
+}
+
+.edit-button,
+.delete-button {
+	background: none;
+	border: none;
+	cursor: pointer;
+	color: #666;
+	padding: 5px;
+	display: inline-flex; /* Ensure icons are inline */
+	align-items: center; /* Center icons vertically */
+	transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.edit-button:hover,
+.delete-button:hover {
+	color: #333;
+	transform: scale(1.05);
+}
+
+.saved-replacements-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 10px;
+	width: 100%;
+	align-items: center;
+	gap: 10px;
+}
+
+.saved-replacements-header h2 {
+	flex-basis: 75%;
+}
+
+.clear-button {
+	background-color: #f44336; /* Red color for the button */
+	color: white;
+	border: none;
+	border-radius: 4px;
+	padding: 5px 10px;
+	font-size: 12px;
+	cursor: pointer;
+	flex-basis: 25%;
+	transition: background-color 0.3s ease;
+}
+
+.clear-button:hover {
+	background-color: #d32f2f; /* Darker red on hover */
+	transform: scale(1.05);
+}
+
+.clear-button:disabled {
+	background-color: #ccc; /* Grey color for disabled state */
+	cursor: not-allowed;
+}
+
+.toggle-group {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.popup {
+	position: fixed;
+	top: 20px;
+	left: 50%;
+	transform: translateX(-50%);
+	color: white;
+	padding: 10px 12px;
+	border-radius: 4px;
+	font-size: 16px;
+	z-index: 1000;
+	opacity: 0;
+	animation: fadeInOut 2s ease-in-out;
+	white-space: normal; /* Changed from nowrap to normal */
+	max-width: 98%;
+	word-wrap: break-word; /* Adds word wrapping */
+}
+
+@keyframes fadeInOut {
+	0% {
+		opacity: 0;
+		transform: translateX(-50%) translateY(-20px);
+	}
+	10% {
+		opacity: 1;
+		transform: translateX(-50%) translateY(0);
+	}
+	90% {
+		opacity: 1;
+		transform: translateX(-50%) translateY(0);
+	}
+	100% {
+		opacity: 0;
+		transform: translateX(-50%) translateY(-20px);
+	}
+}
+
+.popup.success {
+	background-color: #4caf50;
+}
+
+.popup.error {
+	background-color: #ff4d4d;
+}
+
+/* Edit Interface */
+.modal {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	justify-content: center;
+	align-items: center;
+	z-index: 1000;
+}
+
+.modal-content {
+	background-color: white;
+	padding: 20px;
+	border-radius: 8px;
+	width: 300px;
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.modal h2 {
+	margin-top: 0;
+}
+
+.modal .input-group {
+	margin-bottom: 12px;
+}
+
+.modal .input-group-domain {
+	margin-bottom: 8px;
+}
+
+.modal-buttons {
+	display: flex;
+	gap: 10px;
+	justify-content: flex-end;
+}
+
+.modal-buttons button {
+	padding: 8px 16px;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	font-size: 14px;
+}
+
+.modal-buttons .save-button {
+	background-color: #4caf50; /* Green for Save */
+	color: white;
+	transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.modal-buttons .cancel-button {
+	background-color: #ff4d4d; /* Red for Cancel */
+	color: white;
+	transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.modal-buttons .save-button:hover {
+	background-color: #45a049;
+	transform: scale(1.05);
+}
+
+.modal-buttons .cancel-button:hover {
+	background-color: #ff1a1a;
+	transform: scale(1.05);
+}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Word Replacer</title>
+		<link rel="stylesheet" href="styles.css" />
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+	</head>
+	<body>
+		<div class="container">
+			<h1>Word Replacer</h1>
+			<div class="input-group">
+				<label for="word-to-replace">Word to Replace:</label>
+				<input type="text" id="word-to-replace" placeholder="e.g., bitter" />
+			</div>
+			<div class="input-group">
+				<label for="replacement-word">Replacement Word:</label>
+				<input type="text" id="replacement-word" placeholder="e.g., sweet" />
+			</div>
+			<button id="save-button">Save</button>
+			<p id="status"></p>
+
+			<div class="saved-replacements-header">
+				<h2>Saved Replacements</h2>
+				<button id="clear-all-button" class="clear-button" disabled>Clear All</button>
+			</div>
+			<div id="replacements-list" class="replacements-list"></div>
+			<div id="empty-state" class="empty-state">
+				<p>No replacements saved yet. Add one above!</p>
+			</div>
+		</div>
+
+		<div id="edit-modal" class="modal">
+			<div class="modal-content">
+				<h2>Edit Replacement</h2>
+				<div class="input-group">
+					<label for="edit-word-to-replace">Word to Replace:</label>
+					<input type="text" id="edit-word-to-replace" />
+				</div>
+				<div class="input-group">
+					<label for="edit-replacement-word">Replacement Word:</label>
+					<input type="text" id="edit-replacement-word" />
+				</div>
+				<div class="input-group-domain">
+					<div class="toggle-group">
+						<label>Only allow domains: <span style="font-size: 20px" title="Replacements will be applied to only these domains">*</span></label>
+						<label class="domain-toggle">
+							<input type="checkbox" id="toggle-allow-only" />
+							<span class="slider round"></span>
+						</label>
+					</div>
+					<input type="text" id="edit-only-allow-domains" placeholder="e.g., example.com, another.com" />
+				</div>
+				<div class="input-group-domain">
+					<div class="toggle-group">
+						<label
+							>Only exclude domains: <span style="font-size: 20px" title="Replacements won't be applied to only these domains">*</span></label
+						>
+						<label class="domain-toggle">
+							<input type="checkbox" id="toggle-excluded" />
+							<span class="slider round"></span>
+						</label>
+					</div>
+					<input type="text" id="edit-excluded-domains" placeholder="e.g., youtube.com, facebook.com" />
+				</div>
+				<div class="modal-buttons">
+					<button id="save-edit-button" class="save-button">Save Changes</button>
+					<button id="cancel-edit-button" class="cancel-button">Cancel</button>
+				</div>
+			</div>
+		</div>
+		<script src="popup.js"></script>
+	</body>
+</html>
